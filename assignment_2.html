@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>BINF630 Assignment 2 - Samiksha Borkar</title>
+  <meta name="author" content="Samiksha Borkar">
+  
+  <style>
+      body{
+          font-family:Calibri;
+      }
+      h1, h2{
+          font-family:Cambria;
+          border-bottom:2px solid #465E84;
+/*          display:inline-block;*/
+      }
+      h1.plain, h2.plain{
+          display:block;
+          border:none;
+          text-align:center;
+      }
+      img{
+          max-width:100%;
+          margin:0;
+          padding:0;
+      }
+      h3{
+          color:#b87333;
+      }
+  </style>
+</head>
+<body>
+    <h1 class="plain">BINF630 ASSIGNMENT 2</h1>
+    <h2 class="plain">SAMIKSHA BORKAR</h2>
+    
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ol>
+            <li><a href="#protein-sequence">Protein Sequence A3ZYW9</a></li>
+            <li><a href="#secondary-structure-prediction">Secondary Structure Prediction</a></li>
+            <li><a href="#three-dimensional-structure">Three-Dimensional Structure</a></li>
+                <ul>
+                    <li><a href="#template-selection">Template Selection</a></li>
+                    <li><a href="#model-selection">Model Selection</a></li>
+                </ul>
+            <li><a href="#interactive-model">Interactive Model</a></li>
+            <li><a href="#structure-validation">Structure Validation</a></li>
+                <ul>
+                    <li><a href="#saves">SAVES</a></li>
+                    <li><a href="#pdbsum-and-procheck">PDBSum and PROCHECK</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            <li><a href="#comparing-secondary-structures">Comparing Secondary Structures</a></li>
+            <li><a href="#references">References</a></li>
+        </ol>
+    </div>
+    
+    <h2 id="protein-sequence">Protein Sequence A3ZYW9:</h2>
+    <div>
+        <p>Protein Id A3ZYW9 was the ID chosen. This ID was run through Uniprot database in order to find the amino acid sequence.  <a href="http://www.uniprot.org/uniprot/A3ZYW9">Uniprot</a> provided entire information about the protein associated with this ID.</p>
+        <p>For structure prediction we are interested in the sequence, which could be obtained from the same page. If we scroll down the Uniprot page as shown in the screenshot below, we could see the protein sequence, clicking on the “FASTA” button, the sequence in fasta format could be retrieved as shown below.</p>
+        <p><img src="images/protein-sequence.png"/></p>
+        <p><img src="images/protein-sequence-2.png"/></p>
+        <p>The protein sequence length is 620.</p>
+    </div>
+    
+    <h2 id="secondary-structure-prediction">Secondary Structure Prediction</h2>
+    <div>
+        <p>Secondary structure prediction attempts to infer the likely secondary structure for a protein based on its amino acid composition and similarity to sequences with known secondary structure. Secondary structure prediction varies depending on the algorithm being used. There are several tools available that could predict secondary structure of a protein based on different algorithm. For this assignment, <a href="http://www.compbio.dundee.ac.uk/jpred/cgi-bin/jpred_form">JPred</a> version 4 was used with default settings, where it builds a multiple sequence alignment to determine secondary structure characteristics. JPred incorporates the JNet algorithm in order to make accurate predictions. In addition to protein secondary structure JPred also makes predictions on Solvent Accessibility and Coiled-coil regions(Lupas method).</p>
+        <p><img src="images/secondary-structure-prediction-1.png"/></p>
+        <p><img src="images/secondary-structure-prediction-2.png"/></p>
+        <p><img src="images/secondary-structure-prediction-3.png"/></p>
+        <p><img src="images/secondary-structure-prediction-4.png"/></p>                
+        <p>Secondary structure predicted by JPred, is pasted above. Even the Jnet prediction page is pasted to analyze the predictions. The result gives us not only the predictions of helices and sheets, but also a consensus prediction (JnetPRED) as well as a confidence estimate of this prediction (JNetCONF).</p>
+        <h3>Result Summary</h3>
+        <p>Secondary structure predicted shows both helices and beta sheets (red plates and green arrows respectively). Most of the helices show high confidence like the residues around 55-65, 112-128 or 290-310, beta sheets also shows high confidence like residues around 370-374 or 392-397. There are few helices and sheets that are not predicted by JNetPSSM, such as helices around 3-8 or beta sheet around 224-225. Overall the secondary structure for protein ID A3ZYW9 shows more helices than beta sheets.  There are 27 helices and 3 beta sheets( by JNetHMM) algorithm and 24 helices and 6 beta sheets(by JNetPSSM) algorithm.</p>
+    </div>
+    
+    <h2 id="three-dimensional-structure">Three-Dimensional Structure</h2>
+    <div>
+        <p>Just like secondary structure prediction, even for 3D structure prediction several tools could be used. Three dimensional structure prediction depends on different algorithm based on comparative or homology modelling and fold recognition methods, in which the search space is pruned by the assumption that the protein in question adopts a structure that is close to the experimentally determined structure of another homologous protein. One such tool is Swiss-Model, which would be used for this assignment;it assists and guides the user in building protein homology models at different levels of complexity. Swiss-Model does modelling in 3 modes automated mode, alignment mode, project mode. </p>
+        <p>After running the protein sequence (in fasta format) through <a href="http://swissmodel.expasy.org/interactive">Swiss-Model</a>, the input get validated and we come to the page where there is an option to search for templates or building a model. After selecting template search, the page displayed below pops up and provides us several templates showing sequence similarities based on which our model would be built. Template searching is a critical step in homology modelling as quality of a model is determined based on it. Selecting templates with higher coverage and resolution, such as top 4 templates in this list, may result in more valid 3D model prediction.</p>
+
+        <h3 id="template-selection">Template Selection</h3>
+        <p>The first template has highest coverage of 0.96 and sequence similarity of 0.38, similarly the second has coverage of 0.95 and sequence similarity of 0.38 and the third has coverage of 0.92 and sequence similarity of 0.4. It is advisable that we select the templates with highest coverage and better sequence similarity. After we select the template we can click on, “Build Model” which will build models based on the template we chose. In this case I chose top 3 templates with above score and build models based on it.</p>
+        <p><img src="images/template-results.png"/></p>
+
+        <h3 id="model-selection">Model Selection</h3>
+        <p>Three models are built based on top 3 templates we choose as displayed below. <a href="http://swissmodel.expasy.org/templates/3ce2.1">Swiss-model</a> has more preliminary verification statistics, and is also well-recognized. Clicking on the drop down menu we could see sequence as well as statistical details of all the 3 models.</p>
+        <p><img src="images/model-results-1.png"/></p>
+        <p><img src="images/model-results-2.png"/></p>
+        <p>If we click on the individual template link page displayed below appears which  has all the associated details, along with links to PDBe, PDB like databases for comparative analysis. After comparing the details of each model the first model was selected, this had coverage of 0.96 and sequence similarity of 0.38.</p>
+        <p><img src="images/model-results-3.png"/></p>
+        
+        <h3>Model for Protein Sequence A3ZYW9(Associated PDB ID 3CE2)</h3>
+        <p>Model1 was chosen, as it had the best coverage and sequence similarity with given protein ID than the other models. Clicking on the template link of this model, associated <a href="http://www.rcsb.org/pdb/explore/explore.do?structureId=3CE2">PDB</a> file was downloaded to be used to generate interactive model. The associated PDB ID based on which the model was designed is 3CE2.</p>
+        <p><img src="images/a3zyw9.png"/></p>
+        
+        <h2 id="interactive-model">Interactive Model</h2>
+        <p>Structure of the model chosen from the previous tool,  Swiss-model was used to show the three-dimensional shape of protein sequence ID A3ZYW9, as  shown in the following <a href="http://jmol.sourceforge.net/">Jmol</a>, interactive model. To generate the image, the pdb file of the chosen model(3CE2) was used. It was downloaded from Swiss-model page displayed above. The model is presented initially as a ball-and stick model, but other style could  be selected. Some ways to interact with the model is as follows:<p>
+        <div>
+            <ul>
+                <li>Drive the cursor on the image and rotate to interact with it.</li>
+                <li>Right click with mouse to choose from options such as:</li>
+                    <ul>
+                        <li>Change model style (or view/color), example by going to Style-->Scheme-->Cartoons.</li>
+                    </ul>
+                <li>Rotate mouse wheel to zoom in/out.</li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="http://chemapps.stolaf.edu/jmol/jmol.php?source=http://binf.gmu.edu/sborkar2/3ce2.pdb&amp;inline"></script>
+        
+        <h2 id="structure-validation">Structure Validation</h2>
+        <p>The three dimensional model  built in the above stage could be inferred from comparison to known structures of homologous sequences but whether or not this model may exist in this form could be further validated by analyzing the stereochemical quality of the molecular network between residues. The stereochemical validation of modeled structure of protein is an important part of the comparative molecular modeling process. Also, analyzing variable such as the bond lengths, bond angles, dihedral angle, satisfaction of electron donors or acceptors, and phi/psi angles with a Ramachandran plot could assist in verify the probability of, if a given model would exist in reality.</p>
+        <p>Again several resources are available for structural validation of the chosen model. To begin with we could observe the QMEAN4 scores from <a href="http://swissmodel.expasy.org/interactive/bGfxgd/models/">Swiss-Model</a>, which is measured by analyzing the torsion angle and has 4 structure descriptions. Another such medium is GMQE scores, where estimation is based on combined properties from the target-template alignment. The GMQE also takes into account the QMEAN4 score of the obtained model in order to increase reliability of the quality estimation. In case of our model (based on template 3CE2.1.A) the GMQE score is 0.70, which is acceptable.</p>
+        <p>For more in depth structural validation UCL’s, Structure Analysis and Verification Server, version 4 (<a href="http://services.mbi.ucla.edu/SAVES/">SAVES</a>) was used. This server runs six protein validation programs, Procheck, What_Check, Errat, Verify_3D, Prove, and CRYST1 record matches.</p>
+        
+        <h3 id="saves">SAVES</h3>
+        <p>The server gives the outputs of each program in the form of labels by a simple 3 color scheme: </p>
+            <ul>
+                <li><span style="color:green">Pass: Satisfactory</span></li> 
+                <li><span style="color:orange">Warning: Inspection suggestion</span></li>
+                <li><span style="color:red">Error: Inspection recommended of the model.</span></li>
+            </ul>
+        <p>The evaluation <a href="http://services.mbi.ucla.edu/SAVES/T/?job=157764">summary</a> is displayed below, also screenshots of WhatCheck, Prove, Verify3D and Errat evaluations respectively.</p>
+        <ul>
+            <li><strong>CRYST1</strong> was unable to run due to no Cryst in the pdb file</li>
+            <li><strong>PROVE</strong> resulted in <span style="background-color:yellow">Warning</span>, the total number of buried outlier protein atoms was 67 (2.9 percent) of scored atoms.</li>
+            <li><strong>ERRAT</strong> had score, Overall quality factor**: 95.890</li>
+            <li><strong>VERIFY3D</strong> resulted in <span style="color:green">Pass</span>, At least 80% of the amino acids have scored >= 0.2 in the 3D/1D profile</li>
+            <li><strong>WHATCHECK</strong> overall had more 76/101 Pass, 20/101 Warning, and 5/101 Error, for overall <span style="color:green">Pass</span></li>
+            <li><strong>PROCHECK</strong> gave <span style="color:red">Error</span></li>     
+        </ul>
+        <div style="overflow:auto">
+            <div style="float:left">
+                <img src="images/saves-1.png"/>
+            </div>
+            <div style="float:right">
+                <img src="images/saves-7.png"/><br/>
+                <img src="images/saves-6.png"/>                
+                <img src="images/saves-2.png"/>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div style="overflow:auto; margin-top:30px">
+            <div style="float:left">
+                <img src="images/saves-3.png"/>
+            </div>
+            <div style="float:right">
+                <img src="images/saves-4.png"/>
+            </div>
+        </div>
+        <p><img src="images/saves-5.png"/></p>
+        <h4>Summary</h4>
+        <ul>
+            <li><strong>WHATHECK</strong>: The areas that whatcheck measured were as follows; most areas reported pass, there were few errors, which may need some alteration in order to correct the model, like some missing atoms or beta factor missing. There were also few warnings.</li>
+            <li><strong>PROVE</strong>: This is the file where number of outliers is given. In our model total number of buried outlier are 67.</li>
+            <li><strong>ERRAT</strong>: Is a program for verifying protein structures determined by crystallography. It shows the region of error (highlighted in dark) that can be rejected. For our model the overall quality factor**: 95.890.</li>
+            <li><strong>VERIFY3D</strong>: It represents three-dimensional (3D) profile of a protein structure in a table computed from the atomic coordinates of the structure that can be used to score the compatibility of the 3D structure model with any amino acid sequence. In case of our model, 96.97% of the residues had an averaged 3D-1D score >= 0.2 and at least 80% of the amino acids have scored >= 0.2 in the 3D/1D profile.</li>
+            <li><strong>PROCHECK</strong>: Gave error, results were not displayed. Hence independent PROCHECK was performed.</li>
+        </ul>
+        
+        <h3 id="pdbsum-and-procheck">PDBSum and PROCHECK</h3>
+        <p>As <strong>SAVES</strong> was not able to perform Procheck on the model submitted due to error, independent Procheck analysis were performed. The model was submitted to PDSum, which provided with full set of <a href="https://www.ebi.ac.uk/thornton-srv/databases/cgi-bin/pdbsum/GetPage.pl">PDSum</a> validation analysis as well as Procheck analysis. The validation analysis along with Procheck analysis are displayed below:</p>
+        <p><img src="images/pdbsum.png"/></p>
+        <p>The <strong>PDBsum</strong> is a pictorial database that provides an at-a-glance overview of the contents of each 3D structure deposited in the Protein Data Bank. It shows the molecules that make up the structure like protein chains, DNA, ligands and metal ions and schematic diagrams of their interactions.</p>
+        <p>The <strong>PROCHECK</strong> analysis provide an idea of the stereochemical quality of all protein chains in a given PDB structure. They highlight regions of the proteins which appear to have unusual geometry and provide an overall assessment of the structure as a whole.</p>
+        <p><img src="images/procheck.png"/><br/><img src="images/procheck-3.png"/></p>
+        <p><img src="images/procheck-2.png"/></p>
+
+        <h4>Main Chain parameter plot</h4>
+        <p>The six graphs on the main-chain parameters plot shows how the structure (represented by the solid square) compares with well-refined structures at a similar resolution. The 6 properties plotted could be seen at the bottom (Plot statistics). Overall model does seem good.</p>
+        
+        <h4>Side Chain parameter plot</h4>
+        <p>The five graphs on the side-chain parameters plot show how the structure (represented by the solid square) compares with well-refined structures at a similar resolution. The 5 properties of the plot are plotted at the bottom of the graph. Overall model does seem acceptable.</p>
+        
+        <p><img src="images/ramchandran.png"/></p>
+        <h4>Ramachandran plot</h4>
+        <p>This property is measured by the percentage of the protein's residues that are in the most favored regions of the Ramachandran plot. For a good model structure, obtained at high resolution, the expected percentage is to be over 90%. The shaded region reflects this expected region,  decrease in it would worsening the resolution. In case of our model the residues in the favored regions are 94.3%. Thus making it a good model.</p>
+        
+        <h3 id="conclusion">Conclusion</h3>
+        <p>From all the above analysis, we could conclude that the model built for protein ID A3ZYW9, based on template 3CE2, is quite acceptable but we need to investigate further in order to make model better fit and eliminate the errors. There are tools available to adjust the model, like Deepview. By looking into the error and warning regions, an even better model could be configured.  After further iterations a good quality model could be built.</p>
+        
+        <h2 id="comparing-secondary-structures">Comparing Secondary Structure</h2>
+        <p>As the three dimensional model has been developed based on the given protein sequence, we could examine the changes made to the secondary structure prediction. Based on the highest confidence the secondary structure build by Jpred, there would be 24 helices and 6 beta sheets (JNetPSSM).</p>
+        <p>The following picture shows the secondary structure that the three dimensional model was predicted to have by Swiss-Model, with the convention of arrows indicating beta strands and ovals denoting helices. This predication gave significantly more of both helices (34) and sheets (7) than Jpred. Many proteins can fold rapidly and spontaneously. This might probably be due to the residues that are far apart in the linear distance but comes close when folded in three-dimensional structure, thus causing increase in the formation of helices and sheets by increasing the possibility of cross linkage.</p>
+        <p><img src="images/secondary-structure.png"/></p>
+        
+        <h2 id="references">References</h2>
+        <ol>
+            <li>Official website of Uniprot, available online on http://www.uniprot.org/.</li>
+            <li>Official website of JPred, available online on http://www.compbio.dundee.ac.uk/jpred/</li>
+            <li>Official website of Swiss-Model, available online on http://swissmodel.expasy.org/</li>
+            <li>Official software JSMol, available online from http://jmol.sourceforge.net/</li>
+            <li>Official website of Swiss-Model, available online on http://services.mbi.ucla.edu/SAVES/</li>
+            <li>Official website of PDBSum, available online on https://www.ebi.ac.uk/thornton-srv/databases/cgi-bin/pdbsum/GetPage.pl?pdbcode=index.html</li>
+        </ol>
+    </div>
+</body>
+</html>
